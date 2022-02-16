@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Events</title>
+    <style>
+        div{                                /* 55줄에 들어갈 div 스타일 서식, 50*50의 색깔상자를 만들어준다. */
+            width: 50px;
+            height: 500px;
+            background-color: coral;
+        } 
+    </style>
+</head>
+<body>
+    <h2>JavaScript Events 1</h2>
+    <button>Hit button!</button>                    <!-- <button>은 페이지에 버튼을 생성시키는 HTML코드이다.  -->
+    <!-- <script>
+        var btn = document.querySelector('button'); // 쿼리셀렉터를 통해 변수에 해당 버튼의 입력을 연결해줌
+        function ouch(){                            // 함수를 지정, 함수가 호출되면 아프다는 문구를 내보내게 한다.
+            alert("I got damaged!!");
+        }
+        //btn.onclick = ouch;                                                         // .onclick은 '버튼이 눌린 경우'를 나타내는 이벤트 출력문이다.
+        //btn.addEventListener('click', ouch);                                        // .addEventListener는 해당 변수에 이벤트가 입력되었는지 확인하는 문구다. ('입력받을 이벤트',출력내용)으로 구성됨
+        //btn.addEventListener('click', function(){alert("I got damaged again!!")});  // 익명함수와의 활용 예제
+        btn.addEventListener('click', function(event){                              // 함수 안에 'event'라는 오브젝트를 넣어준다.
+            event.target.style.backgroundColor = "pink";                            // .target은, 이 이벤트를 트리거한 것이 무엇인지(클릭 행동), 그리고 뭘 출력할 것인지(스타일.배경을 핑크색으로)를 나타낸다.
+            //event.preventDefault();                                                 // .preventDefault는 해당 이벤트를 중지하고 발생 전으로 돌리는 것이다. 예제로, 하이퍼링크를 클릭하면 한번 눌렸다고 색상이 바뀌는 경우가 있는데, 이 메서드로 그 현상이 안생기게 할 수 있다. 개쩌네 
+            alert("i'm turning pink!!!!"); 
+        });
+                                                        
+    </script> -->
+        
+    <h4>=------------=</h4> <!-- ============================================ -->
+
+    <h1>JavaScript Events 2</h1>
+    <form method="get">
+        <label>Your Name : <input type="text" name="name"></label>  <!-- <label>로 텍스트와 텍스트박스를 연결한다. 'Your Name :' 텍스트를 클릭해도 텍스트박스가 선택됨-->
+                                                                    <!-- <input type="text">는 유저가 데이터를 넣어줄 수 있는 '텍스트'박스를 생성한다. -->
+                                                                    <!-- name은 텍스트값을 말한다. -->
+
+        <input type="submit" value="send">                          <!-- <input type="submit">는 입력을 받을 수 있는 '버튼'을 생성한다. -->
+    </form>
+    <script>
+        var myForm = document.querySelector('form');                // form 의 형태를 가진 쿼리를 찾아 변수로 지정
+        myForm.addEventListener('submit', function(evt){            // 그 안에서 'submit'(버튼)입력을 받으면 evt 라는 함수를 실행
+            evt.preventDefault();                                   // 버튼을 입력해도 입력 이전 상태로 만드는 수식
+            var formData = document.querySelector('input').value;   // 변수 내의'인풋'이 존재하는 코드에 접근해(43번줄) value(유저 입력값)을 받음
+            alert("안녕, " + formData);                             // 받은 입력을 알람창을 통해 출력
+        })                                        
+    </script>
+
+
+    <div> </div>  <!-- 9줄 참고 -->
+    <script>
+        var heading = document.querySelector('h1');                 // h1 쿼리를 찾아 그 문장을 heading변수로 지정
+        var box = document.querySelector('div');                    // div 쿼리를 찾아 그 요소를 box변수로 지정
+
+        box.addEventListener('mouseover',function(){                // box(div로 지정한 50*50의 상자)에 '마우스가 올라가면'(mouseover) 함수 실행
+            heading.innerHTML = "the mouse is over the box!";       // innerHTML로 내부 내용을 다음 텍스트로 바꿈
+        });
+
+        box.addEventListener('mouseout',function(){                 // box에 '마우스가 내려가면'(mouseout) 함수 실행
+            heading.innerHTML = "the mouse has left the box!";      
+        });
+        heading.addEventListener('mouseover',function(){            // 이건 heading에 마우스가 올라가면 함수 실행
+            heading.innerHTML = "roll your mouse over the boxes";   
+        });
+    </script>
+
+    <script>
+        window.addEventListener('scroll', function(){
+            var pagetop = window.pageYOffset;                       // window(창).pageYOffset을 통해, 현재 페이지의 Y축 오프셋 값?을 변수에 넣는다. 
+            //console.log(pagetop);                                   // pageXOffset은 X축 오프셋 값을 나타낸다.
+        });
+    </script>
+    
+
+    <h4>=------------=</h4> <!-- ============================================ -->
+
+    <script>
+        window.addEventListener('resize',function(){                // resize 이벤트는 윈도우창의 사이즈를 조작했을때의 이벤트를 나타낸다.
+            console.log('The window width is '+ window.innerWidth); // .innerWidth 와 Height를 통해 윈도우 창의 세로, 가로 길이 값을 받을 수 있다.
+            console.log('The window height is '+ window.innerHeight);
+        });
+    </script>
+
+    <h4>=------------=</h4> <!-- ============================================ -->
+    
+    <script>
+        window.addEventListener('keydown',function(event){                  // keydown은 아무 키보드 입력(키다운)의 이벤트를 나타낸다.
+            alert("the " + event.which +" key is " + event.key + " key!");  // 입력값을 출력, .which를 넣으면 키의 넘버값이, .key를 넣으면 키의 스트링값이 출력된다. 
+        });
+    </script>
+
+    <h4>=------------=</h4> <!-- ============================================ -->
+    
+    <!-- coursera와는 다른 예제 : 라벨화 -->
+        여러분의 나이대를 골라보세요.<br>
+        <input type="radio" name="ages" id="teen" value="teenage"> 10대<br>                                  <!-- 라벨로 연결하지 않은 것, 텍스트와 연결되지 않음 -->
+        <input type="radio" name="ages" id="twenty" value="twenties"><label for="twenty"> 20대</label><br>   <!-- 라벨로 연결한 것, 텍스트와 연결됨 -->
+
+        <input type="radio" name="ages" id="thirty" value="thirties">
+        <label for="thirty">30대</label><br>
+        <input type="radio" name="ages" id="forty" value="forties">
+        <label for="forty">40대 이상</label><br>
+        <!-- 라벨화의 상관 없이, 브라우저에는 일반적인 텍스트가 랜더링되지만, 라벨화를 하면 사용자가 마우스로 해당 텍스트를 클릭할 경우 연결된 요소가 곧바로 선택되기 때문에 "사용자의 편의성(UX)"을 높일 수 있다. -->
+
+</body>
+</html> 
